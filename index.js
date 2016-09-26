@@ -34,29 +34,12 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			if (text === 'Generic') {
-				sendGenericMessage(sender)
-				continue
-			}
-			if(text === 'give'){
-				
-				var request = require("request")
-
-				var url = "http://tbx.codegen.net/TravelBoxSurf//api/surf/search?templateRef=htl-tophit-aggr&sessionId=null&&bookingType=HOTE&size=6&pax=2"
-
-				request({
-					url: url,
-					json: true
-				}, function (error, response, body) {
-
-					if (!error && response.statusCode === 200) {
-						console.log(body) // Print the json response
-						sendTextMessage(sender, "Text received, echo: " + body.no)
-					}
-				})
-				
-				
-			}
+			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+ +			if(text === 'give'){
+ +				var config = require('./data.json');
+ +				console.log(config.firstName + ' ' + config.lastName);
+ +				sendTextMessage(sender, "Text received, echo: " + config.firstName)
+ +			}
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
