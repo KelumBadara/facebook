@@ -39,9 +39,9 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			if(text === 'give'){
-				var config = require('./data.json');
-				console.log(config.firstName + ' ' + config.lastName);
-				sendTextMessage(sender, "Text received, echo: " + config.firstName)
+				var config = require('http://tbx.codegen.net/TravelBoxSurf//api/surf/search?templateRef=htl-tophit-aggr&sessionId=null&&bookingType=HOTE&size=6&pax=2');
+				
+				sendTextMessage(sender, "Text received, echo: " + config.no)
 			}
 		}
 		if (event.postback) {
