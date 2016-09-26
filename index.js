@@ -39,12 +39,22 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			if(text === 'give'){
-				var config = require('http://tbx.codegen.net/TravelBoxSurf//api/surf/search?templateRef=htl-tophit-aggr&sessionId=null&&bookingType=HOTE&size=6&pax=2');
-				while(config===null){
 				
-				}
+				var request = require("request")
+
+				var url = "http://tbx.codegen.net/TravelBoxSurf//api/surf/search?templateRef=htl-tophit-aggr&sessionId=null&&bookingType=HOTE&size=6&pax=2"
+
+				request({
+					url: url,
+					json: true
+				}, function (error, response, body) {
+
+					if (!error && response.statusCode === 200) {
+						console.log(body) // Print the json response
+						sendTextMessage(sender, "Text received, echo: " + body.no)
+					}
+				})
 				
-				sendTextMessage(sender, "Text received, echo: " + config.no)
 				
 			}
 		}
