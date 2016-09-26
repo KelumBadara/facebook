@@ -34,8 +34,7 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
- +			if(text === 'give'){
+			if(text === 'give'){
  +				var config = require('./data.json');
  +				console.log(config.firstName + ' ' + config.lastName);
  +				sendTextMessage(sender, "Text received, echo: " + config.firstName)
